@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ski Gear Advisor – Find the right skis and boots</title>
+  <meta name="description" content="Tell us about your skiing and get 3 ski and 3 ski boot recommendations, with plain-language reasons, before your holiday.">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="./" data-action="home"><span aria-hidden="true">⛷</span> Ski Gear Advisor</a>
+    </div>
+  </header>
+
+  <div class="demo-banner" role="note">
+    <div class="wrap">Demo: the products shown are <strong>invented sample data</strong>, not real skis or boots.</div>
+  </div>
+
+  <main id="main" class="wrap" tabindex="-1">
+    <!-- Landing -->
+    <section id="view-landing" class="view hero" aria-labelledby="landing-title">
+      <h1 id="landing-title">Know what to buy before your ski holiday</h1>
+      <p class="lead">Answer a few simple questions about your skiing. You get 3 skis and 3 ski boots that fit you, each with a clear reason why. Takes about 2 minutes, no account needed.</p>
+      <button class="btn btn-primary btn-lg" type="button" data-action="start">Find my gear</button>
+      <ul class="points">
+        <li><strong>No jargon.</strong> Every term is explained.</li>
+        <li><strong>Honest picks.</strong> Best match, best value, and one to grow into.</li>
+        <li><strong>Private.</strong> Your answers stay in your browser.</li>
+      </ul>
+    </section>
+
+    <!-- Questionnaire -->
+    <section id="view-quiz" class="view" hidden aria-labelledby="quiz-title">
+      <div class="progress" aria-hidden="false">
+        <div class="progress-text"><span id="progress-label">Question 1 of 8</span></div>
+        <div class="progress-bar" role="progressbar" aria-valuemin="1" aria-valuemax="8" aria-valuenow="1" aria-labelledby="progress-label"><span id="progress-fill"></span></div>
+      </div>
+      <form id="quiz-form" novalidate>
+        <div id="quiz-step"></div>
+        <p id="quiz-error" class="error" role="alert" hidden></p>
+        <div class="nav">
+          <button class="btn btn-ghost" type="button" id="btn-back">← Back</button>
+          <button class="btn btn-primary" type="submit" id="btn-next">Next</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Results -->
+    <section id="view-results" class="view" hidden aria-labelledby="results-title">
+      <h1 id="results-title" tabindex="-1">Your ski gear recommendations</h1>
+      <p class="lead" id="results-summary"></p>
+      <div id="results-notes"></div>
+      <div class="actions">
+        <button class="btn btn-ghost" type="button" data-action="edit">Edit my answers</button>
+        <button class="btn btn-ghost" type="button" data-action="copy">Copy link to results</button>
+        <button class="btn btn-ghost" type="button" data-action="restart">Start over</button>
+        <span id="copy-status" class="status" role="status"></span>
+      </div>
+
+      <h2 class="section-title">Skis</h2>
+      <div id="results-skis" class="cards"></div>
+
+      <h2 class="section-title">Ski boots</h2>
+      <div id="results-boots" class="cards"></div>
+
+      <section class="panel" aria-labelledby="next-title">
+        <h2 id="next-title">Before you buy: a quick checklist</h2>
+        <ul class="checklist">
+          <li><strong>Get boots fitted in a shop.</strong> Boots are the most important piece of gear, and fit matters more than any spec. Try a few on and walk around for 10 minutes.</li>
+          <li><strong>Have bindings set by a technician.</strong> The release setting depends on your weight, height, skiing level and boot size.</li>
+          <li><strong>Check ski length when you hold them.</strong> We suggest a length per ski; anything within a few centimetres is fine.</li>
+          <li><strong>Not sure you will ski often?</strong> Renting skis and buying only boots is a popular, cost-effective middle ground.</li>
+          <li><strong>Compare prices.</strong> Last season's models are often much cheaper and nearly identical.</li>
+        </ul>
+      </section>
+
+      <section class="panel" aria-labelledby="gloss-title">
+        <h2 id="gloss-title">Ski words explained</h2>
+        <dl class="glossary">
+          <dt>Waist width</dt><dd>How wide the ski is underfoot, in millimetres. Narrow (under 80) is quick on groomed runs. Wide (over 95) floats in deep snow.</dd>
+          <dt>Flex / stiffness</dt><dd>How much the ski or boot resists bending. Softer is easier and more forgiving. Stiffer is more stable at speed but demands more skill.</dd>
+          <dt>Rocker</dt><dd>An upward curve in the tip (and sometimes tail) of the ski that makes turning easier and helps in soft snow.</dd>
+          <dt>Last</dt><dd>The width of the boot at the forefoot, in millimetres. Narrow is about 97–99, medium about 100–101, wide 102 and up.</dd>
+          <dt>Walk mode</dt><dd>A switch on the boot that frees the cuff so walking and hiking are more comfortable.</dd>
+          <dt>Mondopoint</dt><dd>Ski boot size in centimetres of foot length. We estimate it from your normal shoe size.</dd>
+        </dl>
+      </section>
+
+      <p class="fine">These recommendations are guidance, not a guarantee of fit. Always try boots on in store.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="wrap">Ski Gear Advisor · demo project</div></footer>
+
+  <script src="data/catalog.js"></script>
+  <script src="src/engine.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
