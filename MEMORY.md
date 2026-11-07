@@ -20,6 +20,8 @@ Website where skiers describe their experience and get 3 ski and 3 ski boot reco
 - The Claude preview server cannot read `~/Documents` (macOS permissions), so I tested by serving a copy from the scratchpad folder with `ruby -run -e httpd`.
 - Not built / limits: no user feedback widget (needs a backend), no saved accounts, Dutch language, retailer links. EU shoe sizes only (hint given for US sizes). Boot sizes above EU ~46 for women fall outside catalog ranges and return fewer results (UI shows "No boots found").
 
+- **2026-11-05**: GitHub hosting. User wants the code on GitHub and is new to git. Command Line Tools/git installed; I ran `git init` (branch `main`), added `.gitignore`, and made the first local commit. NOT pushed yet: the user must create the GitHub repo and sign in themselves (I never enter credentials). Recommended path for them: GitHub Desktop -> Add Local Repository -> Publish (keep private while data is placeholder). Optional: GitHub Pages (Settings -> Pages -> main / root) for a free live site.
+
 ## Scoring engine design
 - Input: level 1-4, terrain, style, height, weight, gender (m/w/x), boot size (mondopoint), foot width, days per year, budgetMax (EUR **per item**, null = none). Validated; bad input throws.
 - Hard filters: gender line, level range, budget, boot size range. If fewer than 3 remain, filters relax in 5 steps (budget +20%, level +-1, budget +50% & any gender line, then very wide) and a plain-language `notes` message is returned so the UI can tell the user.
