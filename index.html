@@ -3,12 +3,27 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071327">
   <title>Ski Gear Advisor – Find the right skis and boots</title>
   <meta name="description" content="Tell us about your skiing and get 3 ski and 3 ski boot recommendations, with plain-language reasons, before your holiday.">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
+
+  <!-- Decorative alpine scene (fixed behind everything) -->
+  <div class="scene" aria-hidden="true">
+    <div class="sky"></div>
+    <div class="sun"></div>
+    <svg class="ridge r1" viewBox="0 0 1440 400" preserveAspectRatio="none"><path d="M0 260 L120 200 L210 240 L330 150 L450 230 L560 180 L690 250 L820 140 L940 220 L1060 170 L1180 240 L1300 190 L1440 250 L1440 400 L0 400Z"/></svg>
+    <div class="mist m1"></div>
+    <svg class="ridge r2" viewBox="0 0 1440 400" preserveAspectRatio="none"><path d="M0 300 L100 250 L240 290 L380 200 L500 280 L640 230 L780 300 L900 210 L1040 290 L1180 240 L1320 300 L1440 270 L1440 400 L0 400Z"/></svg>
+    <div class="mist m2"></div>
+    <svg class="ridge r3" viewBox="0 0 1440 400" preserveAspectRatio="none"><path d="M0 340 L160 300 L300 335 L460 280 L620 340 L760 310 L920 345 L1080 295 L1240 340 L1440 310 L1440 400 L0 400Z"/></svg>
+    <canvas id="snow"></canvas>
+    <div class="vignette"></div>
+  </div>
+
   <header class="site-header">
     <div class="wrap header-inner">
       <a class="brand" href="./" data-action="home"><span aria-hidden="true">⛷</span> Ski Gear Advisor</a>
@@ -22,13 +37,14 @@
   <main id="main" class="wrap" tabindex="-1">
     <!-- Landing -->
     <section id="view-landing" class="view hero" aria-labelledby="landing-title">
-      <h1 id="landing-title">Know what to buy before your ski holiday</h1>
-      <p class="lead">Answer a few simple questions about your skiing. You get 3 skis and 3 ski boots that fit you, each with a clear reason why. Takes about 2 minutes, no account needed.</p>
-      <button class="btn btn-primary btn-lg" type="button" data-action="start">Find my gear</button>
+      <p class="eyebrow">Skis and boots · 2 minutes · no account</p>
+      <h1 id="landing-title">Know what to buy before your <span class="grad">ski holiday</span></h1>
+      <p class="lead">Answer a few simple questions about your skiing. You get 3 skis and 3 ski boots that fit you, each with a clear reason why.</p>
+      <button class="btn btn-primary btn-lg" type="button" data-action="start">Find my gear <span aria-hidden="true">→</span></button>
       <ul class="points">
-        <li><strong>No jargon.</strong> Every term is explained.</li>
-        <li><strong>Honest picks.</strong> Best match, best value, and one to grow into.</li>
-        <li><strong>Private.</strong> Your answers stay in your browser.</li>
+        <li><strong>No jargon</strong><span>Every term is explained.</span></li>
+        <li><strong>Honest picks</strong><span>Best match, best value, and one to grow into.</span></li>
+        <li><strong>Private</strong><span>Your answers stay in your browser.</span></li>
       </ul>
     </section>
 
@@ -38,7 +54,7 @@
         <div class="progress-text"><span id="progress-label">Question 1 of 8</span></div>
         <div class="progress-bar" role="progressbar" aria-valuemin="1" aria-valuemax="8" aria-valuenow="1" aria-labelledby="progress-label"><span id="progress-fill"></span></div>
       </div>
-      <form id="quiz-form" novalidate>
+      <form id="quiz-form" class="sheet" novalidate>
         <div id="quiz-step"></div>
         <p id="quiz-error" class="error" role="alert" hidden></p>
         <div class="nav">
@@ -50,23 +66,29 @@
 
     <!-- Results -->
     <section id="view-results" class="view" hidden aria-labelledby="results-title">
-      <h1 id="results-title" tabindex="-1">Your ski gear recommendations</h1>
-      <p class="lead" id="results-summary"></p>
-      <div id="results-notes"></div>
-      <div class="actions">
-        <button class="btn btn-ghost" type="button" data-action="edit">Edit my answers</button>
-        <button class="btn btn-ghost" type="button" data-action="copy">Copy link to results</button>
-        <button class="btn btn-ghost" type="button" data-action="restart">Start over</button>
-        <span id="copy-status" class="status" role="status"></span>
+      <div class="sheet intro">
+        <h1 id="results-title" tabindex="-1">Your ski gear recommendations</h1>
+        <p class="lead" id="results-summary"></p>
+        <div id="results-notes"></div>
+        <div class="actions">
+          <button class="btn btn-ghost" type="button" data-action="edit">Edit my answers</button>
+          <button class="btn btn-ghost" type="button" data-action="copy">Copy link to results</button>
+          <button class="btn btn-ghost" type="button" data-action="restart">Start over</button>
+          <span id="copy-status" class="status" role="status"></span>
+        </div>
       </div>
 
-      <h2 class="section-title">Skis</h2>
-      <div id="results-skis" class="cards"></div>
+      <div class="sheet">
+        <h2 class="section-title">Skis</h2>
+        <div id="results-skis" class="cards"></div>
+      </div>
 
-      <h2 class="section-title">Ski boots</h2>
-      <div id="results-boots" class="cards"></div>
+      <div class="sheet">
+        <h2 class="section-title">Ski boots</h2>
+        <div id="results-boots" class="cards"></div>
+      </div>
 
-      <section class="panel" aria-labelledby="next-title">
+      <section class="sheet" aria-labelledby="next-title">
         <h2 id="next-title">Before you buy: a quick checklist</h2>
         <ul class="checklist">
           <li><strong>Get boots fitted in a shop.</strong> Boots are the most important piece of gear, and fit matters more than any spec. Try a few on and walk around for 10 minutes.</li>
@@ -77,7 +99,7 @@
         </ul>
       </section>
 
-      <section class="panel" aria-labelledby="gloss-title">
+      <section class="sheet" aria-labelledby="gloss-title">
         <h2 id="gloss-title">Ski words explained</h2>
         <dl class="glossary">
           <dt>Waist width</dt><dd>How wide the ski is underfoot, in millimetres. Narrow (under 80) is quick on groomed runs. Wide (over 95) floats in deep snow.</dd>
@@ -97,6 +119,7 @@
 
   <script src="data/catalog.js"></script>
   <script src="src/engine.js"></script>
+  <script src="js/scene.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

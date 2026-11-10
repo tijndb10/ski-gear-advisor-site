@@ -22,6 +22,16 @@ Website where skiers describe their experience and get 3 ski and 3 ski boot reco
 
 - **2026-11-05**: GitHub hosting. User wants the code on GitHub and is new to git. Command Line Tools/git installed; I ran `git init` (branch `main`), added `.gitignore`, and made the first local commit. NOT pushed yet: the user must create the GitHub repo and sign in themselves (I never enter credentials). Recommended path for them: GitHub Desktop -> Add Local Repository -> Publish (keep private while data is placeholder). Optional: GitHub Pages (Settings -> Pages -> main / root) for a free live site.
 
+- **2026-11-07**: Site is LIVE. Code published via GitHub Desktop to `tijndb10/ski-gear-advisor-site` (now **public**, needed for free GitHub Pages). Pages serves branch `main` / root at https://tijndb10.github.io/ski-gear-advisor-site/ . Confirmed working by the user. The first web upload (flat files, no folders) was in `tijndb10/ski-gear-advisor`; it is obsolete and can be deleted (Settings -> Danger Zone).
+- Update workflow: edit files here -> in GitHub Desktop review under Changes, Commit to main, then Push origin -> live site updates in ~1 minute. Remember to run `bash scripts/build-catalog.sh` after editing data/catalog.json.
+- Caveats: the repo is public, so CLAUDE.md, MEMORY.md and PRD.md are visible; the live site shows invented demo products (banner says so). The Claude session had no GitHub connector, so all GitHub steps were done by the user.
+
+- **2026-11-07**: Visual redesign, "cinematic alpine" (user's choice; whole site; inspiration from awwwards.com / motionsites.ai taken as ideas only, nothing copied). Awwwards = gallery; MotionSites = paid AI-builder prompts behind a signup (not purchased). No photos/video, so the scene is built in code: fixed dawn-sky gradient + glowing sun, 3 SVG mountain ridges with parallax (mouse + scroll), drifting mist, falling-snow canvas ([js/scene.js](js/scene.js)). Content sits in frosted dark "sheets"; product cards are solid white; big bold type with a gradient accent; staggered entrance animations, animated match bars, hover/press states. Files changed: index.html, css/styles.css, new js/scene.js. app.js and the engine are untouched, so the 3932 engine checks still pass.
+- Accessibility kept: focus rings, AA contrast checked on text over the scene (lead text brightened + shadow), `prefers-reduced-motion` disables all animation and snow, no horizontal scroll at 375px.
+- Design decisions: system font stack (no Google Fonts, to avoid third-party requests/GDPR concerns); no external images. Parallax ridges only sink on scroll (lifting them exposed the sky).
+- Testing note: in the Claude browser pane, CSS animations stay at time 0 while the pane is not displayed (no frames), so content looks invisible; it is a test artifact and settles once frames render.
+- Not yet pushed: redesign is local until committed and pushed with GitHub Desktop.
+
 ## Scoring engine design
 - Input: level 1-4, terrain, style, height, weight, gender (m/w/x), boot size (mondopoint), foot width, days per year, budgetMax (EUR **per item**, null = none). Validated; bad input throws.
 - Hard filters: gender line, level range, budget, boot size range. If fewer than 3 remain, filters relax in 5 steps (budget +20%, level +-1, budget +50% & any gender line, then very wide) and a plain-language `notes` message is returned so the UI can tell the user.
@@ -58,7 +68,8 @@ Website where skiers describe their experience and get 3 ski and 3 ski boot reco
 
 ## Next steps
 - User reviews PRD and answers open questions.
-- User reviews the UI (open index.html) and gives feedback on look, wording and flow.
+- Delete the obsolete `ski-gear-advisor` repository on GitHub.
+- User reviews the live UI and gives feedback on look, wording and flow.
 - Replace placeholder catalog with real products (decide data source) and re-tune scoring weights.
 - Improve the "no results" state when a boot size is outside the catalog; consider Dutch translation, affiliate links, feedback widget.
 - Decide whether budget should be per item or total (currently per item) and wire `daysPerYear` into scoring.
